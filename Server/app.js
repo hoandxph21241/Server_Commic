@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var apiRouter = require('./routes/api');
 const walletRouter = require('./routes/walletRouter');
-
+var comicRouter = require('./routes/comicRoutes');
 
 var app = express();
 
@@ -28,7 +28,7 @@ app.use('/users', usersRouter);
 
 app.use('/api', apiRouter);
 app.use('/wallet', walletRouter);
-
+app.use('/comics', comicRouter);
 
 
 // catch 404 and forward to error handler
