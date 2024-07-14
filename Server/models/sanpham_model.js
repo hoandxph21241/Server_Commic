@@ -8,7 +8,7 @@ const TruyentranhSchema = new db.mongoose.Schema(
         name: {type: String, required : true}, // required : true : dữ liệu bắt buộc nhập
         other: {type: String, required : false},
         mota: {type: String, required : false},
-        binhluan:{type: db.mongoose.Schema.Types.ObjectId, ref: "BinhLuanModel"},
+        // binhluan:{type: db.mongoose.Schema.Types.ObjectId, ref: "BinhLuanModel"},
         img: {type: String, required : false},
         namxuatban: {type: String, required : false},
         anhtruyen:{type: db.mongoose.Schema.Types.ObjectId, ref: "AnhTruyenModel"},
@@ -61,6 +61,11 @@ const AnhtruyenSchema = new db.mongoose.Schema(
         img3: {type: String, required : false},
         img4: {type: String, required : false},
         img5: {type: String, required : false},
+        img6: {type: String, required : false},
+        img7: {type: String, required : false},
+        img8: {type: String, required : false},
+        img9: {type: String, required : false},
+        img10: {type: String, required : false},
         idTruyen:{type: db.mongoose.Schema.Types.ObjectId, ref: "TruyenTranhModel"},
     },
     {
