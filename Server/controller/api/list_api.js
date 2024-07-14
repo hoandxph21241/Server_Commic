@@ -48,9 +48,7 @@ exports.listTruyentranh = async (req, res, next) => {
   msg = "Danh sach Du Lieu Truyen Tranh";
   try {
     let list = await model.TruyenTranhModel.find()
-      .populate("binhluan")
       .populate("anhtruyen");
-    let listBinhluan = await model.BinhLuanModel.find();
     console.log(list);
     //   return  res.status(200).json({msg: 'lấy địa chỉ thành công', data: list});
     return res.status(200).json(list);
@@ -68,9 +66,7 @@ exports.listChiTietTruyen = async (req, res, next) => {
   let truyenId = req.params.id;
   try {
     //  let list = await model.TruyenTranhModel.find().populate("binhluan").populate("anhtruyen");
-    let chitietList = await model.TruyenTranhModel.findById(truyenId).populate(
-      "binhluan"
-    );
+    let chitietList = await model.TruyenTranhModel.findById(truyenId);
     // let listBinhluan = await model.BinhLuanModel.find();
     console.log(chitietList);
     //   return  res.status(200).json({msg: 'lấy địa chỉ thành công', data: list});
