@@ -1,7 +1,7 @@
 // controllers/comicController.js
 const axios = require('axios');
 
-const getComics = async (req, res) => {
+exports.getComics = async (req, res, next) => {
     try {
         const response = await axios.get('https://otruyenapi.com/v1/api/home');
         const data = response.data;
@@ -19,4 +19,16 @@ const getComics = async (req, res) => {
     }
 };
 
-module.exports = { getComics };
+
+exports.getDetailComics = async (req, res, next) => {
+    try {
+            const response = await axios.get('https://sv1.otruyencdn.com/v1/api/chapter/6694da04c926626890a18aaf');
+            const data = response.data.data;
+    
+            res.render('Comics/ReadComic', { data });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Có lỗi xảy ra');
+        }
+};
+
