@@ -20,12 +20,36 @@ exports.getComics = async (req, res, next) => {
 };
 
 
-exports.getDetailComics = async (req, res, next) => {
+exports.getReadComics = async (req, res, next) => {
     try {
-            const response = await axios.get('https://sv1.otruyencdn.com/v1/api/chapter/6694da04c926626890a18aaf');
+        let idComics = req.params.idComics
+            const api = "https://sv1.otruyencdn.com/v1/api/chapter/"+idComics
+            const response = await axios.get(api);
             const data = response.data.data;
+           
     
             res.render('Comics/ReadComic', { data });
+            console.log(api);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Có lỗi xảy ra');
+        }
+};
+
+exports.getDetailComics = async (req, res, next) => {
+    try {
+        let slug = req.params.slug
+
+            const api = 'https://otruyenapi.com/v1/api/truyen-tranh/'+ slug
+            const response = await axios.get(api);
+            const data = response.data.data;
+    
+            res.render('Comics/DetailComic', { 
+                title: data.seoOnPage.titleHead, 
+                comic: data.item,
+                breadcrumb: data.breadCrumb
+              });
+              console.log(api);
         } catch (error) {
             console.error(error);
             res.status(500).send('Có lỗi xảy ra');

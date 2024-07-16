@@ -19,7 +19,7 @@
                                 <h5 class="card-title"><%= comic.name %></h5>
                                 <p class="card-text"><%= comic.origin_name.join(', ') %></p>
                                 <p class="card-text">Status: <%= comic.status %></p>
-                                <a href="<%= comic.chaptersLatest[0].chapter_api_data %>" class="btn btn-primary">Read latest chapter</a>
+                                <a href="http://localhost:3000/comics/detailcomics/<%= comic.slug %>" class="btn btn-primary">Read a comic</a>
                             </div>
                         </div>
                     </div>
