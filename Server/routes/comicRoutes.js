@@ -9,4 +9,5 @@ router.get('/readcomics/:idComics', comicController.getReadComics);
 
 router.get('/detailcomics/:slug', comicController.getDetailComics);
 
+
 module.exports = router;
