@@ -1,7 +1,5 @@
-// controllers/walletController.js
 const walletModel = require('../models/walletModels');
 
-// Hàm để xử lý yêu cầu lấy thông tin ví
 async function getWalletInfo(req, res) {
     try {
         const { address } = req.params;

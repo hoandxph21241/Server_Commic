@@ -38,7 +38,8 @@ exports.getReadComics = async (req, res, next) => {
 
 exports.getDetailComics = async (req, res, next) => {
     try {
-        let slug = req.params.slug
+        let slug = req.params.slug;
+        let title,breadcrumb;
 
             const api = 'https://otruyenapi.com/v1/api/truyen-tranh/'+ slug
             const response = await axios.get(api);
@@ -50,6 +51,7 @@ exports.getDetailComics = async (req, res, next) => {
                 breadcrumb: data.breadCrumb
               });
               console.log(api);
+              console.log(title,breadcrumb)
         } catch (error) {
             console.error(error);
             res.status(500).send('Có lỗi xảy ra');
