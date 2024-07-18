@@ -3,8 +3,33 @@ const axios = require('axios');
 
 exports.getComics = async (req, res, next) => {
     try {
-        const response = await axios.get('https://otruyenapi.com/v1/api/home');
+        let page = parseInt(req.query.page) || 1;
+        const api = 'https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=' + page;
+        console.log(api);
+        const response = await axios.get(api);
         const data = response.data;
+        const itemsPerPage = data.data.params.pagination.totalItemsPerPage; // Số lượng mục trên mỗi trang
+        
+
+        const totalPages = Math.ceil(data.data.params.pagination.totalItems / itemsPerPage);
+
+        // Tính toán phạm vi trang cần hiển thị
+        const maxPagesToShow = data.data.params.pagination.pageRanges;
+        let startPage = Math.max(page - Math.floor(maxPagesToShow / 2), 1);
+        let endPage = startPage + maxPagesToShow - 1;
+
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+        }
+
+        const pages = [];
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+
+
+        // console.log(data.data.params.pagination.totalItems);
 
         // Kiểm tra dữ liệu
         if (!data || !data.data || !data.data.items) {
@@ -12,13 +37,68 @@ exports.getComics = async (req, res, next) => {
         }
 
         // Render view với dữ liệu truyện tranh
-        res.render('Home/Home', { title: 'Danh sách truyện tranh', comics: data.data.items });
+        res.render('Home/Home', { 
+            title: 'Danh sách truyện tranh', 
+            comics: data.data.items,
+            currentPage: page,
+            totalPages: totalPages,
+            pages: pages });
     } catch (error) {
         console.error('Error fetching comics:', error);
         res.status(500).json({ error: 'Error fetching comics' });
     }
 };
 
+exports.searchComics = async (req, res, next) => {
+    try {
+        let page = parseInt(req.query.page) || 1;
+        let keyword = req.query.keyword;
+        const api = 'https://otruyenapi.com/v1/api/tim-kiem?keyword='+keyword+'&page='+page;
+        console.log(api);
+        const response = await axios.get(api);
+        const data = response.data;
+        const itemsPerPage = data.data.params.pagination.totalItemsPerPage; // Số lượng mục trên mỗi trang
+
+
+        const totalPages = Math.ceil(data.data.params.pagination.totalItems / itemsPerPage);
+
+        // Tính toán phạm vi trang cần hiển thị
+        const maxPagesToShow = data.data.params.pagination.pageRanges;
+        let startPage = Math.max(page - Math.floor(maxPagesToShow / 2), 1);
+        let endPage = startPage + maxPagesToShow - 1;
+
+        if (endPage > totalPages) {
+            endPage = totalPages;
+            startPage = Math.max(endPage - maxPagesToShow + 1, 1);
+        }
+
+        const pages = [];
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+
+
+        // console.log(data.data.params.pagination.totalItems);
+
+        // Kiểm tra dữ liệu
+        if (!data || !data.data || !data.data.items) {
+            throw new Error('Invalid data from API');
+        }
+
+        // Render view với dữ liệu truyện tranh
+        res.render('Home/Search', {
+            title: 'Danh sách truyện tranh',
+            comics: data.data.items,
+            currentPage: page,
+            totalPages: totalPages,
+            keyword: keyword,
+            pages: pages
+        });
+    } catch (error) {
+        console.error('Error fetching comics:', error);
+        res.status(500).json({ error: 'Error fetching comics' });
+    }
+};
 
 exports.getReadComics = async (req, res, next) => {
     try {
