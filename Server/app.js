@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 
 var apiRouter = require('./routes/api');
 const walletRouter = require('./routes/walletRouter');
+const websocketServices = require('./services/websocketService');
 var comicRouter = require('./routes/comicRoutes');
 
 var app = express();
@@ -29,7 +30,7 @@ app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/wallet', walletRouter);
 app.use('/comics', comicRouter);
-
+websocketServices;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
