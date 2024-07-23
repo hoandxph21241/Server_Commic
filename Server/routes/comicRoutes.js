@@ -4,6 +4,8 @@ const comicController = require('../controller/comicController');
 
 // Định nghĩa route để lấy dữ liệu truyện tranh
 router.get('', comicController.getComics);
+router.get('/search', comicController.searchComics);
+
 
 router.get('/readcomics/:idComics', comicController.getReadComics);
 

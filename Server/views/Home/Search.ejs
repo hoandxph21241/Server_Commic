@@ -14,7 +14,7 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
             </form>
         </nav>
-        <h1 class="mt-4 mb-4"><%= title %> - Trang: <%=currentPage%></h1>
+        <h1 class="mt-4 mb-4">Danh sách tìm kiếm: <%= keyword %> - Trang: <%=currentPage%></h1>
         <div class="row">
             <% if (comics && comics.length > 0) { %>
                 <% comics.forEach(function(comic) { %>
@@ -34,13 +34,13 @@
             <% } %>
             <div >
                 <% if (currentPage > 1) { %>
-                  <a class="btn btn-warning" href="/comics?page=<%= currentPage - 1 %>">Previous</a>
+                  <a class="btn btn-warning" href="/comics/search?keyword=<%=keyword%>&page=<%= currentPage - 1 %>">Previous</a>
                 <% } %>
                 <% pages.forEach(page => { %>
-                  <a class="btn btn-warning" href="/comics?page=<%= page %>" style="<%= page === currentPage ? 'font-weight: bold;' : '' %>"><%= page %></a>
+                  <a class="btn btn-warning" href="/comics/search?keyword=<%=keyword%>&page=<%= page %>" style="<%= page === currentPage ? 'font-weight: bold;' : '' %>"><%= page %></a>
                 <% }) %>
                 <% if (currentPage < totalPages) { %>
-                  <a class="btn btn-warning" href="/comics?page=<%= currentPage + 1 %>">Next</a>
+                  <a class="btn btn-warning" href="/comics/search?keyword=<%=keyword%>&page=<%= currentPage + 1 %>">Next</a>
                 <% } %>
               </div>
         </div>
