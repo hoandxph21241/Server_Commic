@@ -1,16 +1,19 @@
-const walletModel = require('../models/walletModels');
+const walletModel = require("../models/walletModels");
 const axios = require("axios");
+
+
 exports.getWalletInfo = async (req, res, next) => {
-    try {
-        const { address } = req.params;
-        const walletInfo = await walletModel.getWalletInfo(address);
-        res.json(walletInfo);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+  try {
+    const { address } = req.params;
+    const walletInfo = await walletModel.getWalletInfo(address);
+    res.json(walletInfo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
+
 exports.connectWallet = async (req, res, next) => {
-    const PRIV_KEY = "0q9Ah3X8KCpZfxah-r";
+    const PRIV_KEY = "8rf0RyyIIsEE2f-r";
     const wallet = req.params.id;
 
     if (!wallet) {
@@ -55,4 +58,6 @@ exports.connectWallet = async (req, res, next) => {
         res.status(500).send("An error occurred");
     }
 };
+
+
 
