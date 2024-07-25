@@ -86,7 +86,7 @@ exports.searchComics = async (req, res, next) => {
         }
 
         // Render view với dữ liệu truyện tranh
-        res.render('Home/Search', {
+        res.render('Home/Home', {
             title: 'Danh sách truyện tranh',
             comics: data.data.items,
             currentPage: page,
