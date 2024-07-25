@@ -11,6 +11,7 @@ var apiRouter = require('./routes/api');
 const walletRouter = require('./routes/walletRouter');
 const websocketServices = require('./services/websocketService');
 var comicRouter = require('./routes/comicRoutes');
+const nftRoutes = require('./routes/nftRounter');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/wallet', walletRouter);
 app.use('/comics', comicRouter);
+app.use('/nft', nftRoutes);
 websocketServices;
 
 // catch 404 and forward to error handler
