@@ -26,9 +26,16 @@
                         name="keyword">
                 </form>
             </nav> -->
-            <h1 class="mt-4 mb-4">
-                <%= title %> - Trang: <%=currentPage%>
-            </h1>
+
+            <div class="row m-4">
+                <div class="col text-start fs-3 fw-bold">
+                    <%= title %>
+                </div>
+                <div class="col text-end fs-4 font-monospace">
+                    Trang: <%= currentPage %>
+                </div>
+            </div>
+
             <div class="row">
                 <% if (comics && comics.length> 0) { %>
                     <% comics.forEach(function(comic) { %>
@@ -51,6 +58,8 @@
                             <% } else { %>
                                 <p>Không có dữ liệu truyện tranh để hiển thị.</p>
                                 <% } %>
+
+
                                     <div>
                                         <% if (currentPage> 1) { %>
                                             <a class="btn btn-warning"
