@@ -7,10 +7,15 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var apiRouter = require('./routes/api');
 const walletRouter = require('./routes/walletRouter');
+const websocketServices = require('./services/websocketService');
 var comicRouter = require('./routes/comicRoutes');
+const nftRoutes = require('./routes/nftRounter');
 
+const adminRoutes = require('./routes/adminRounter');
+var AuthRounter = require("./routes/Auth_Rounters");
+//session
+var session = require('express-session')
 var app = express();
 
 // view engine setup
@@ -23,12 +28,34 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // Để xử lý các yêu cầu POST với JSON
+app.use(bodyParser.urlencoded({ extended: true })); // Để xử lý các form-urlencoded
+
+
+//session check
+app.use(session({
+  secret: 'AAAAAAAAABBBBBBBBBCCCCCCCDDDDDDD',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+
+
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 
-app.use('/api', apiRouter);
+
 app.use('/wallet', walletRouter);
 app.use('/comics', comicRouter);
+app.use('/nft', nftRoutes);
+app.use('/admin', adminRoutes);
+app.use("/auth", AuthRounter);
+
+
+websocketServices;
 
 
 // catch 404 and forward to error handler
