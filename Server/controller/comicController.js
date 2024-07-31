@@ -30,19 +30,17 @@ exports.getComics = async (req, res, next) => {
 
 
         // console.log(data.data.params.pagination.totalItems);
-
-        // Kiểm tra dữ liệu
         if (!data || !data.data || !data.data.items) {
             throw new Error('Invalid data from API');
         }
-
-        // Render view với dữ liệu truyện tranh
         res.render('Home/Home', { 
             title: 'Danh sách truyện tranh', 
             comics: data.data.items,
             currentPage: page,
             totalPages: totalPages,
-            pages: pages });
+            pages: pages,
+            userLogin: req.session.userLogin });
+        console.log(req.session.userLogin);
     } catch (error) {
         console.error('Error fetching comics:', error);
         res.status(500).json({ error: 'Error fetching comics' });
@@ -92,7 +90,8 @@ exports.searchComics = async (req, res, next) => {
             currentPage: page,
             totalPages: totalPages,
             keyword: keyword,
-            pages: pages
+            pages: pages,
+            userLogin: req.session.userLogin
         });
     } catch (error) {
         console.error('Error fetching comics:', error);
@@ -108,7 +107,7 @@ exports.getReadComics = async (req, res, next) => {
             const data = response.data.data;
            
     
-            res.render('Comics/ReadComic', { data });
+            res.render('Comics/ReadComic', { data , userLogin: req.session.userLogin});
             console.log(api);
         } catch (error) {
             console.error(error);
@@ -128,7 +127,8 @@ exports.getDetailComics = async (req, res, next) => {
             res.render('Comics/DetailComic', { 
                 title: data.seoOnPage.titleHead, 
                 comic: data.item,
-                breadcrumb: data.breadCrumb
+                breadcrumb: data.breadCrumb,
+                userLogin: req.session.userLogin
               });
               console.log(api);
               console.log(title,breadcrumb)
