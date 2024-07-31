@@ -1,15 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const comicController = require('../controller/comicController');
+const comicController = require("../controller/comicController");
 
-// Định nghĩa route để lấy dữ liệu truyện tranh
-router.get('', comicController.getComics);
-router.get('/search', comicController.searchComics);
+function requireAdmin(req, res, next) {
+  if (!req.session.userLogin) {
+    return res.redirect("/auth/signin");
+  }
+  if (req.session.userLogin.role === 1) {
+    return next();
+  }
+  if (req.session.userLogin.role === 2) {
+    return next();
+  }
+  return res.redirect("/comics");
+}
 
 
-router.get('/readcomics/:idComics', comicController.getReadComics);
+router.get("/", requireAdmin, comicController.getComics);
 
-router.get('/detailcomics/:slug', comicController.getDetailComics);
+router.get("/search", requireAdmin, comicController.searchComics);
 
+router.get(
+  "/readcomics/:idComics",
+  requireAdmin,
+  comicController.getReadComics
+);
+
+router.get(
+  "/detailcomics/:slug",
+  requireAdmin,
+  comicController.getDetailComics
+);
 
 module.exports = router;
