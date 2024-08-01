@@ -15,7 +15,6 @@ function requireAdmin(req, res, next) {
   return res.redirect("/comics");
 }
 
-
 router.get("/", requireAdmin, comicController.getComics);
 
 router.get("/search", requireAdmin, comicController.searchComics);
