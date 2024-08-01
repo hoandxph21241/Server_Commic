@@ -1,40 +1,5 @@
 var Model = require("../models/Model");
 const axios = require('axios');
-
-// exports.Register = async (req, res, next) => {
-//   let msg = "";
-//   try {
-//     if (!req.body.nameAccount || !req.body.namePassword) {
-//       msg = "Vui lòng không để trống trường nào";
-//       return res.render("auth/register.ejs", { msg: msg });
-//     }
-//     const userExists = await Model.UserModel.findOne({ nameAccount: req.body.nameAccount });
-//     if (userExists) {
-//       msg = "Email is already in use";
-//       return res.render("auth/register.ejs", { msg: msg });
-//     }
-
-//     if (req.body.namePassword !== req.body.confirmPassword) {
-//       console.log(req.body.namePassword+" "+req.body.confirmPassword);
-//       msg = "Password and Confirm Password are incorrect";
-//       return res.render("auth/register.ejs", { msg: msg });
-//     }
-//     const user = new Model.UserModel({
-//       nameAccount: req.body.nameAccount,
-//       namePassword: req.body.namePassword,
-//       role: 1 
-//     });
-//     const savedUser = await user.save();
-//     console.log( "Register Success!");
-//     console.log( "|"+savedUser+"|")
-//     msg = "Đăng ký thành công!";
-//   } catch (error) {
-//     msg = error.message;
-//   }
-//   res.render("auth/register.ejs", { msg: msg });
-// };
-
-
 const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiI0NzU5ZWMzZi0xNGJjLTQwZmEtYjVlYi0wNDQyMDNjZmYxMGIiLCJzdWIiOiJjYzc3OWRjNC1jOTIyLTRkZWItYjRiOC0zY2RjZjE3MTNkNDEiLCJpYXQiOjE3MjE3NDk1MDh9.jSIdFMx4CVJC2cW2rUCLqhO4cwq6On1uS6mUX7NdSzA';
 
 
