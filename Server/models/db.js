@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //connect
-// mongoose.connect('mongodb+srv://hoandxph21241:nNpnELAJau2PNpKp@cluster0.epqmdv7.mongodb.net/Comics_Data')
-mongoose.connect('mongodb://127.0.0.1/Server_Comic')
+mongoose.connect('mongodb+srv://hoandxph21241:nNpnELAJau2PNpKp@cluster0.epqmdv7.mongodb.net/Comics_Data')
+// mongoose.connect('mongodb://127.0.0.1/Server_Comic')
 .then(()=>{
     console.log("Đã Kết Nối ");
 })
